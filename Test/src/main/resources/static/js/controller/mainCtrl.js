@@ -1,17 +1,18 @@
-var app=angular.module("myApp",[]).config(function ($routeProvider) {
+var app = angular.module("myApp",['ngRoute']).config(function ($routeProvider) {
             $routeProvider.when("/index",{
-                templateUrl:"/index.html",
-                controller:"js/controller/mainCtrl"
+                templateUrl:"index.html",
+                controller:"mainCtrl"
             }).when("/login",{
-                templateUrl:"/html/login.html",
-                controller:"js/controller/loginCtrl"
+                templateUrl:"html/login.html",
+                controller:"loginCtrl"
             }).when("/registry",{
-                templateUrl:"/html/registry.html",
-                controller:"js/controller/registryCtrl"
+                templateUrl:"html/registry.html",
+                controller:"registryCtrl"
             }).otherwise({
-                redirectTo:"/index"
+                redirectTo:"/"
             })
         });
-app.controller("mainCtrl",function () {
-
+app.controller("mainCtrl",function ($rootScope,$scope) {
+    $rootScope.isLandingPage = false;
+    console.log("");
 })

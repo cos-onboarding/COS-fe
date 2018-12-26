@@ -1,45 +1,37 @@
-<!DOCTYPE html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link type="text/css" rel="styleSheet" href="/styles/registry.css" />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="webjars/angularjs/1.7.5/angular.min.js"></script>
-    <script type="text/javascript" src="js/controller/controller.js"></script>
-</head>
-
-
-<body id="RegistryForm">
     <div class="container">
         <h1 class="form-heading">Registry Form</h1>
         <div class="registry-form">
             <div class="main-div">
                 <div class="panel">
                     <h2>User Registry</h2>
-                    <p>Please enter your email and password</p>
+                    <p>Please enter your username and password</p>
                 </div>
                 <form id="Registry">
 
                     <div class="form-group">
 
 
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                        <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="username" ng-blur="usernameCheck()">
+                        <p class="text-warning" ng-hide="!IsUsernamePass">Please input a valid username cannot be empty!</p>
+                        <p class="text-warning" ng-hide="!IsUsernameBlank">Username cannot be empty!</p>
+                    </div>
+
+                    <div class="form-group">
+
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="passowrd">
 
                     </div>
 
                     <div class="form-group">
 
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" ng-model="confirm Password">
+                        <p class="text-warning" ng-hide="!IsPasswordConfirmed">Password must be same!</p>
 
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" ng-click="newUser()" ng-disabled="!(IsPasswordConfirmed&&IsUsernamePass)">Registry Now</button>
 
                 </form>
             </div>
-            <p class="botto-text"> Designed by Sunil Rajput</p>
         </div>
     </div>
-</body>
