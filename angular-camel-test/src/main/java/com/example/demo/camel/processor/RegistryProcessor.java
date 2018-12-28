@@ -1,8 +1,6 @@
 package com.example.demo.camel.processor;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
