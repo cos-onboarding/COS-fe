@@ -8,11 +8,14 @@ var app = angular.module("myApp",['ngRoute']).config(function ($routeProvider) {
             }).when("/registry",{
                 templateUrl:"html/registry.html",
                 controller:"registryCtrl"
+            }).when("/overview",{
+                templateUrl:"html/overview.html",
+                controller:"overviewCtrl"
             }).otherwise({
                 redirectTo:"/"
             })
         });
 app.controller("mainCtrl",function ($rootScope,$scope) {
-    $rootScope.isLandingPage = false;
-    console.log("");
+    $rootScope.isLandingPage = true;
+    console.log("1"+$rootScope.isLandingPage);
 })

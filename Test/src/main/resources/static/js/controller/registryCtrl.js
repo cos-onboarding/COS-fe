@@ -1,37 +1,45 @@
 app.controller("registryCtrl",function ($rootScope,$scope,$http) {
-    $rootScope.isLandingPage = true;
+    $rootScope.isLandingPage = false;
+    console.log("3"+$rootScope.isLandingPage);
     
-    $scope.IsUsernamePass = false;
-    $scope.IsUsernameBlank = false;
-    $scope.IsPasswordConfirmed = false;
+    $scope.isUsernamePass = true;
+    $scope.isUsernameBlank = false;
+    $scope.isPasswordConfirmed = true;
+    $scope.isButtonDisabled = true;
 
-    var data = { "username": $scope.username, "password": $scope.password};
-
-    var config = {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },//application/json
-    };
     $scope.usernameCheck = function(){
         if("" !== $scope.username) {
-            $scope.IsUsernameBlank = false;
-            $http.post("http://localhost:8081/api/username-check", data, config).then(function (response) {
-                console.log(response);
-                $scope.hello=response.data.data;
-                $scope.IsUsernamePass = true;
+            var param = { username: $scope.username};
+            $scope.isUsernameBlank = false;
+            $http.post("/camel/api/usrcheck", param).then(function (response) {
+                if("success" == response.data.data) {
+                    $scope.isUsernamePass = true;
+                    $scope.isButtonDisabled = false;
+                } else {
+                    $scope.isUsernamePass = false;
+                }
+            }).catch(function(){
+                
             });
         } else {
-            $scope.IsUsernameBlank = true;
+            $scope.isButtonDisabled = true;
+            $scope.isUsernamePass = true;
+            $scope.isUsernameBlank = true;
         }
     }
 
     $scope.newUser = function(){
+        var data = { username: $scope.username, password: $scope.password};
         if($scope.password === $scope.confirmPassword) {
-            $scope.IsPasswordConfirmed = true;
-            $http.post("http://localhost:8081/api/registry", data, config).then(function (response) {
+            $scope.isPasswordConfirmed = true;
+            $http.post("/camel/api/registry", data).then(function (response) {
                 console.log(response);
                 $scope.hello=response.data.data;
+            }).catch(function(){
+                
             });
         } else {
-            $scope.IsPasswordConfirmed = false;
+            $scope.isPasswordConfirmed = false;
         }
         
     }

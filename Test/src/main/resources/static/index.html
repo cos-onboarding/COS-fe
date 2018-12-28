@@ -10,14 +10,17 @@
     <script type="text/javascript" src="webjars/angularjs/1.7.5/angular.min.js"></script>
     <script type="text/javascript" src="webjars/angularjs/1.7.5/angular-route.min.js"></script>
     <script type="text/javascript" src="js/controller/mainCtrl.js"></script>
-    <script type="text/javascript" src="/js/controller/loginCtrl.js"></script>
-    <script type="text/javascript" src="/js/controller/registryCtrl.js"></script>
+    <script type="text/javascript" src="js/controller/loginCtrl.js"></script>
+    <script type="text/javascript" src="js/controller/registryCtrl.js"></script>
+    <script type="text/javascript" src="js/controller/overviewCtrl.js"></script>
 </head>
 
 <body ng-app="myApp">
-    <div ng-controller="mainCtrl" ng-hide="isLandingPage">
+    <div ng-controller="mainCtrl">
+        <div ng-if="isLandingPage">
         <a class="btn btn-primary" href="#!/login">Login</a>
         <a class="btn btn-primary" href="#!/registry">Registry</a>
+        </div>
     </div>
     <div ng-view="">
 
