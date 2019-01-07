@@ -19,6 +19,7 @@ public class TestApplication {
 	    return servlet;
 	}
 	public static void main(String[] args) {
+		System.out.println("hello");
 		SpringApplication.run(TestApplication.class, args);
 
 	}
