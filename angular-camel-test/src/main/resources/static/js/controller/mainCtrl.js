@@ -1,18 +1,24 @@
-var app = angular.module("myApp",['ngRoute']).config(function ($routeProvider) {
-            $routeProvider.when("/index",{
+var app = angular.module("myApp",['ui.router','ui.calendar','ui.bootstrap']).config(function ($stateProvider, $urlRouterProvider) {
+            $stateProvider.state("index",{
+                url: '/index',
                 templateUrl:"index.html",
                 controller:"mainCtrl"
-            }).when("/login",{
+            }).state("login",{
+                url: '/login',
                 templateUrl:"html/login.html",
                 controller:"loginCtrl"
-            }).when("/registry",{
+            }).state("registry",{
+                url: '/registry',
                 templateUrl:"html/registry.html",
                 controller:"registryCtrl"
-            }).when("/overview",{
+            }).state("overview",{
+                url: '/overview',
                 templateUrl:"html/overview.html",
                 controller:"overviewCtrl"
-            }).otherwise({
-                redirectTo:"/"
+            }).state("calendar",{
+                url: '/calendar',
+                templateUrl:"html/calendar.html",
+                controller:"CalendarCtrl"
             })
         });
 app.controller("mainCtrl",function ($rootScope,$scope) {
