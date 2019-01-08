@@ -1,0 +1,52 @@
+<script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js">
+</script>
+
+<body ng-app="">
+  <div>
+    <h1>Contact Information</h1>
+    <p>All fields are required unless stated otherwise.</p>
+    <h2>Registered office address in the place of incorporation</h2>
+    <label>Is the address outside Hong Kong?</label><br><br>
+    <input type="radio" name="address" value="yes" ng-model="officeaddress" />yes
+    <input type="radio" name="address" value="no" ng-model="officeaddress" />no<br>
+
+    <div ng-switch="officeaddress">
+      <div ng-switch-when="yes">
+        <p>Registered office address</p>
+        <input type="text" name="address"><br><br>
+        <label>Country/City:</label>
+        <select>
+          <option value="China">China</option>
+          <option value="US">US</option>
+          <option value="UK">UK</option>
+        </select>
+      </div>
+      <div ng-switch-when="no">
+        <h1>no</h1>
+      </div>
+    </div>
+    <h3>Principal business address</h3>
+    <label>Principal business address?</label><br><br>
+    <input type="radio" name="Principaladdress" value="1" />Same as Registered Office
+    Address  
+    <input type="radio" name="Principaladdress" value="2" />Other Address<br>
+
+    <h3>Correspondence address</h3>
+    <label>Correspondence address</label><br><br>
+    <input type="radio" name="Correspondence address" value="1" />Same as Registered
+    Office
+    Address<br><br>
+    <input type="radio" name="Correspondence address" value="2" />Same as Principal
+    Business Address<br><br>
+    <input type="radio" name="Correspondence address" value="3" />Other Address<br>
+
+    <h3>Contact telephone number/email</h3>
+    <label>Office telephone number</label>
+    <input type="text" name="telephone" /><br><br>
+    <label>Email address </label>
+    <input type="Email" name="Email" /><br><br>
+
+    <button type="submit" ng-click="saveInfo()">saveInfo</button>
+  </div>
+</body>
+ 
