@@ -29,6 +29,9 @@ public class CamelRoute extends RouteBuilder {
 	@Value("${applications.overview.url}")
 	private String appsOverviewUrl;
 	
+	@Value("${application.basicinfo.url}")
+	private String basicinfoUrl;
+	
 	@Override
 	public void configure() throws Exception {
 		restConfiguration()
@@ -54,6 +57,26 @@ public class CamelRoute extends RouteBuilder {
 		  .post("/registry")
 		  .to("direct:registryService");
 		from("direct:registryService").process(new RegistryProcessor()).to(registryUrl);
+		
+		//保存basicinfo
+		rest("/api/")
+		  .id("basicinfo-route")
+		  .consumes("application/json")
+		  .post("/basicinfo")
+		  .to("direct:basicinfoService");
+		from("direct:basicinfoService").process(new RegistryProcessor()).to(basicinfoUrl);
+//		from("direct:basicinfoService").process(new Processor() {
+//			   
+//				@Override
+//				public void process(Exchange exchange) throws Exception {
+//					InputStream body = null;
+//					body = exchange.getIn().getBody(InputStream.class);
+//					String data = CamelProcessorUtils.setHttpBody(body);
+//			        exchange.getOut().setHeader("content-type", "application/xml");
+//			        exchange.getOut().setBody(data);
+//				}
+//			  }).to(basicinfoUrl);
+	
 		
 		rest("/api/")
 		  .id("usrcheck-route")
