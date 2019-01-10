@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.camel.processor.LoginProcessor;
 import com.example.demo.camel.processor.RegistryProcessor;
+import com.example.demo.camel.processor.SaveinfoProcessor;
 import com.example.demo.utils.CamelProcessorUtils;
 
 @Component
@@ -64,7 +65,7 @@ public class CamelRoute extends RouteBuilder {
 		  .consumes("application/json")
 		  .post("/basicinfo")
 		  .to("direct:basicinfoService");
-		from("direct:basicinfoService").process(new RegistryProcessor()).to(basicinfoUrl);
+		from("direct:basicinfoService").process(new SaveinfoProcessor()).to(basicinfoUrl);
 //		from("direct:basicinfoService").process(new Processor() {
 //			   
 //				@Override
@@ -80,7 +81,7 @@ public class CamelRoute extends RouteBuilder {
 		
 		rest("/api/")
 		  .id("usrcheck-route")
-		  .consumes("application/json")
+		  .consumes("application/json")	
 		  .post("/usrcheck")
 		  .to("direct:usrcheckService");
 		from("direct:usrcheckService").process(new Processor() {
