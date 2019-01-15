@@ -1,54 +1,272 @@
-<script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js">
-</script>
+<div class="container">
+  <div class="form-group" ng-init="baseinit()">
 
-<body>
+    <!-- <p class="text-warning" ng-show="isPageError">There are some error on the page!</p> -->
+    <h1 class="heading">Contact information</h1>
+    <label>All fields are required unless stated otherwise.</label>
 
-  <div ng-controller="basicinfoCtrl">
-    <h1>Contact Information</h1>
-    <p>All fields are required unless stated otherwise.</p>
-    <h2>Registered office address in the place of incorporation</h2>
-    <label>Is the address outside Hong Kong?</label><br>
-    <input type="radio" name="address" value="yes" ng-model="officeaddress" />yes
-    <input type="radio" name="address" value="no" ng-model="officeaddress" />no<br>
-
-    <div ng-switch="officeaddress">
-      <div ng-switch-when="yes">
-        <p>Registered office address</p>
-        <input type="text" name="RegisteredaddressName" ng-model="$parent.registeredaddress"  id="RegisteredaddressId"><br>
-        <label>Country/City:</label>
-        <select name="city" ng-model="$parent.city">
-          <option value="China" >China</option>
-          <option value="US" >US</option>
-          <option value="UK">UK</option>
-        </select>
-      </div>
-      <div ng-switch-when="no">
-        <h1>no</h1>
-      </div>
+    <!-- sub-category 1 -->
+    <h4 class="sub-category">Registered office address in the place of incorporation</h4>
+    <p class="text"><label>Is the address outside Hong Kong?</label></p>
+    <div class="radio-btn">
+      <input type="radio" ng-model="IsAddressOutsideHK" name="answerisHK" value="Yes">Yes
+      <input type="radio" ng-model="IsAddressOutsideHK" name="answerisHK" value="No">No
     </div>
-    <h3>Principal business address</h3>
-    <label>Principal business address?</label><br><br>
-    <input type="radio" name="Principaladdress" value="1" ng-model="Principaladdress"/>Same as Registered Office
-    Address  
-    <input type="radio" name="Principaladdress" value="2" ng-model="Principaladdress"/>Other Address<br>
+    <div ng-show="IsAddressOutsideHK == 'Yes'">
+        <p class="text"><label>Registered office address</label></p>
+        <p><input type="text" ng-model="$parent.RegisteredOfficeAddress1"></p>
+        <p><input type="text" ng-model="$parent.RegisteredOfficeAddress2"></p>
+        <p><input type="text" ng-model="$parent.RegisteredOfficeAddress3"></p>
+        
+        <p class="text"><label>Country/City</label></p>
+        <!-- ng-options="country for country in countrys" -->
+        <select ng-model="RegisteredCountry" >
+                <!-- 在js中写下拉菜单的选项 -->
+                <option name="RegisteredCountry" value="">
+                <option name="RegisteredCountry" value="China">China
+                <option name="RegisteredCountry" value="UK">UK
+                <option name="RegisteredCountry" value="US">US
+                <option name="RegisteredCountry" value="Hong Kong">Hong Kong
+        </select>  
+        <p class="text"><label>Postal code (Optional)</label></p>
+        <p><input type="text" ng-model="RegisteredPostalCode"></p>
+    </div>
+    <div ng-show="IsAddressOutsideHK == 'No'">
+        <p class="text"><label>Do you want the standard address format?</label></p>
+        <select ng-model="$parent.IsStandardAddressFormat">
+            <option name="$parent.StandardAddressFormat" value="Yes">Yes
+            <option name="$parent.StandardAddressFormat" value="No">NO
+        </select>
+        <div ng-show="IsStandardAddressFormat== 'Yes'">
+            <p class="text"><label>Registered office address</label></p>
+            <div class="radio-btn">
+                <input type="radio" ng-model="$parent.RegisteredOfficeAddress" name="answer" value="Room">Room
+                <!-- <input type="radio" ng-model="RegisteredOfficeAddress" name="answer" value="Flat">Flat -->
+            </div>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeAddress0"></p>
+            <p class="text"><label>Floor</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeFloor"></p>
+            <p class="text"><label>Block</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeBlock"></p>
+            <p class="text"><label>Name of building</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficebuilding"></p>
+            <p class="text"><label>Name of Street/Road</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeStreet"></p>
+            <p class="text"><label>District</label></p>
+            <select ng-model="$parent.RegisteredOfficeDistrict" aria-placeholder="Please select">
+                <option name="RODistrict" value="1">ABERDEND HK
+                <option name="RODistrict" value="2">CASTLE PEAK NT
+                <option name="RODistrict" value="3">CAUSEWAY BAY HK
+            </select>
+        </div>
+        <div ng-show="IsStandardAddressFormat== 'No'">
+            <p class="text"><label>Registered office address</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeAddress1"></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeAddress2"></p>
+            <p><input type="text" ng-model="$parent.RegisteredOfficeAddress3"></p>
+            <p class="text"><label>District</label></p>
+            <p><input type="text" ng-model="$parent.RegisteredDistrict"></p>
+        </div>
+    </div>
 
-    <h3>Correspondence address</h3>
-    <label>Correspondence address</label><br><br>
-    <input type="radio" name="Correspondenceaddress"  value="1"  ng-model="Correspondenceaddress" />Same as Registered
-    Office
-    Address<br><br>
-    <input type="radio" name="Correspondenceaddress" value="2" ng-model="Correspondenceaddress"/>Same as Principal
-    Business Address<br><br>
-    <input type="radio" name="Correspondenceaddress" value="3" ng-model="Correspondenceaddress"/>Other Address<br>
+    <!-- sub-category 2 -->
+    <h4 class="sub-category">Principal business address</h4>
+    <p class="text"><label>Principal business address</label></p>
+    <div class="radio-btn">
+        <input type="radio" ng-model="IsPBAddressSameAsROAddress" name="answer" value="SameAsRegisteredOfficeAddress">Same as Registered Office Address
+        <input type="radio" ng-model="IsPBAddressSameAsROAddress" name="answer" value="OtherAddress">Other Address
+    </div>
+    <div ng-show="IsPBAddressSameAsROAddress == 'OtherAddress'">
+        <p class="text"><label>Is the address outside Hong Kong?</label></p>
+        <div class="radio-btn">
+            <input type="radio" ng-model="$parent.IsAddressOutsideHK_pb" name="answer_HK_PB" value="Yes">Yes
+            <input type="radio" ng-model="$parent.IsAddressOutsideHK_pb" name="answer_HK_PB" value="No">No
+        </div>
+        <div ng-show="IsAddressOutsideHK_pb == 'Yes'">
+            <p class="text"><label>Principal business address</label></p>
+            <p><input type="text" ng-model="$parent.PrincipalBusinessAddress1"></p>
+            <p><input type="text" ng-model="$parent.PrincipalBusinessAddress2"></p>
+            <p><input type="text" ng-model="$parent.PrincipalBusinessAddress3"></p>
+            
+            <p class="text"><label>Country/City</label></p>
+            <!-- ng-options="country for country in countrys" -->
+            <select ng-model="$parent.PrincipalBusinessCountry" >
+                    <!-- 在js中写下拉菜单的选项 -->
+                    <option name="PrincipalBusinessCountry" value="">
+                    <option name="PrincipalBusinessCountry" value="China">China
+                    <option name="PrincipalBusinessCountry" value="UK">UK
+                    <option name="PrincipalBusinessCountry" value="US">US
+                    <option name="RegisteredCountry" value="Hong Kong">Hong Kong
+            </select>  
+            <p class="text"><label>Postal code (Optional)</label></p>
+            <p><input type="text" ng-model="PrincipalBusinessPostalCode"></p>
+        </div>
+        <div ng-show="IsAddressOutsideHK_pb == 'No'">
+            <p class="text"><label>Do you want the standard address format?</label></p>
+            <select ng-model="IsStandardAddressFormat_pb">
+                <option name="StandardAddressFormat_pb" value="Yes">Yes
+                <option name="StandardAddressFormat_pb" value="No">NO
+            </select>
+            <div ng-show="IsStandardAddressFormat_pb == 'Yes'">
+                <p class="text"><label>Principal business address</label></p>
+                <div class="radio-btn">
+                    <input type="radio" ng-model="$parent.PrincipalBusinessAddress" name="answer" value="Room">Room
+                    <!-- <input type="radio" ng-model="PrincipalBusinessAddress" name="answer" value="Flat">Flat -->
+                </div>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessAddress0"></p>
+                <p class="text"><label>Floor</label></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessFloor"></p>
+                <p class="text"><label>Block</label></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessBlock"></p>
+                <p class="text"><label>Name of building</label></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessBuilding"></p>
+                <p class="text"><label>Name of Street/Road</label></p>
+                <p><input type="text" ng-model="$parent.$parent.PrincipalBusinessStreet"></p>
+                <p class="text"><label>District</label></p>
+                <select ng-model="$parent.PrincipalBusinessDistrict" ng-placeholder="Please select">
+                    <option name="PBDistrict" value="AH">ABERDEND HK
+                    <option name="PBDistrict" value="CPN">CASTLE PEAK NT
+                    <option name="PBDistrict" value="CBH">CAUSEWAY BAY HK
+                </select>
+            </div>
+            <div ng-show="IsStandardAddressFormat_pb== 'No'">
+                <p class="text"><label>Principal business address</label></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessAddress1"></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessAddress2"></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessAddress3"></p>
+                <p class="text"><label>District</label></p>
+                <p><input type="text" ng-model="$parent.PrincipalBusinessDistrict"></p>
+            </div>
+        </div>
+    </div>
 
-    <h3>Contact telephone number/email</h3>
-    <label>Office telephone number</label><br>
-    <input type="text" name="telephone"  ng-model="telephone"/><br>
-    <label>Email address </label><br>
-    <input type="Email" name="Email"  ng-model="Email"/><br>
+    <!-- sub-category 3 -->
+    <h4 class="sub-category">Correspondence address</h4>
+    <p class="text">
+        <label>Correspondence address</label>
+        <a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a>
+    </p>
+    <div class="radio-btn">
+        <input type="radio" ng-model="IsAddressAsRegisterOrPB" name="answer_IsAddOrPb" value="SameAsRegisteredOA">Same as Registered Office Address
+        <input type="radio" ng-model="IsAddressAsRegisterOrPB" name="answer_IsAddOrPb" value="SameAsPrincipalBusinessA">Same as Principal Business Address
+        <input type="radio" ng-model="IsAddressAsRegisterOrPB" name="answer_IsAddOrPb" value="OtherAddress">Other Address
+    </div>
+    <div ng-show="IsAddressAsRegisterOrPB == 'OtherAddress'">
+        <p class="text"><label>Is the address outside Hong Kong?</label></p>
+        <div class="radio-btn">
+            <input type="radio" ng-model="$parent.IsAddressOutsideHK_Cor" name="answer" value="Yes">Yes
+            <input type="radio" ng-model="$parent.IsAddressOutsideHK_Cor" name="answer" value="No">No
+        </div>
 
-    <button type="submit" ng-click="saveInfo()">saveInfo</button>
+        <div ng-show="IsAddressOutsideHK_Cor == 'Yes'">
+            <p class="text"><label>Correspondence address</label></p>
+            <p><input type="text" ng-model="$parent.CorrespondenceAddress1"></p>
+            <p><input type="text" ng-model="$parent.CorrespondenceAddress2"></p>
+            <p><input type="text" ng-model="$parent.CorrespondenceAddress3"></p>
+            
+            <p class="text"><label>Country/City</label></p>
+            <!-- ng-options="country for country in countrys" -->
+            <select ng-model="$parent.CorrespondenceCountry" >
+                    <!-- 在js中写下拉菜单的选项 -->
+                    <option name="CorrespondenceCountry" value="">
+                    <option name="CorrespondenceCountry" value="China">China
+                    <option name="CorrespondenceCountry" value="UK">UK
+                    <option name="CorrespondenceCountry" value="US">US
+                    <option name="RegisteredCountry" value="Hong Kong">Hong Kong
+            </select>  
+            <p class="text"><label>Postal code (Optional)</label></p>
+            <p><input type="text" ng-model="CorrespondencePostalCode"></p>
+        </div>
+        <div ng-show="IsAddressOutsideHK_Cor == 'No'">
+            <p class="text"><label>Do you want the standard address format?</label></p>
+            <select ng-model="$parent.IsStandardAddressFormat_Cor">
+                <option name="StandardAddressFormat_Cor" value="Yes">Yes
+                <option name="StandardAddressFormat_Cor" value="No">NO
+            </select>
+            <div ng-show="IsStandardAddressFormat_Cor== 'Yes'">
+                <p class="text"><label>Correspondence address</label></p>
+                <div class="radio-btn">
+                    <input type="radio" ng-model="$parent.CorrespondenceAddress" name="answer" value="Room">Room
+                    <!-- <input type="radio" ng-model="CorrespondenceAddress" name="answer" value="Flat">Flat -->
+                </div>
+                <p><input type="text" ng-model="$parent.CorrespondenceAddress0"></p>
+                <p class="text"><label>Floor</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceFloor"></p>
+                <p class="text"><label>Block</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceBlock"></p>
+                <p class="text"><label>Name of building</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceBuilding"></p>
+                <p class="text"><label>Name of Street/Road</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceStreet"></p>
+                <p class="text"><label>District</label></p>
+                <select ng-model="$parent.CorrespondenceDistrict" ng-placeholder="Please select">
+                    <option name="CorDistrict" value="Yes">ABERDEND HK
+                    <option name="CorDistrict" value="No">CASTLE PEAK NT
+                    <option name="CorDistrict" value="No">CAUSEWAY BAY HK
+                </select>
+            </div>
+            <div ng-show="IsStandardAddressFormat_Cor == 'No'">
+                <p class="text"><label>Correspondence address</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceAddress1"></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceAddress2"></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceAddress3"></p>
+                <p class="text"><label>District</label></p>
+                <p><input type="text" ng-model="$parent.CorrespondenceDistrict"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- sub-category 4 -->
+    <h4 class="sub-category">Contact telephone number/email</h4>
+    <p class="text"><label>Company</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactTelCompany"></p>
+    
+    <p class="text"><label>Office telephone number 1</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactTel_header"> - <input type="text" ng-model="ContactTel_body"></p>
+    <!-- <p class="text"><label>Office telephone number 2(Optional)</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactTel_header1"> - <input type="text" ng-model="ContactTel_body1"></p> -->
+    
+    <p class="text"><label>Office fax number (Optional)</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactFaxNo_header"> - <input type="text" ng-model="ContactFaxNo_body"></p>
+    <p class="text"><label>Email address</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    
+    <p><input type="text" ng-model="ContactEmail"></p>
+    
+    <p class="text"><label>Business website (Optional)</label></p>
+    <p><input type="text" ng-model="ContactWebsite"></p>
+
+
+    <!-- sub-category 5 -->
+    <!-- <h4 class="sub-category">Details of contact person 1</h4>
+    <p class="text"><label>Title</label></p>
+    <select ng-model="ContactPersonTitle">
+        <option name="CPTitle" value="Mr">Mr
+        <option name="CPTitle" value="Mrs">Mrs
+        <option name="CPTitle" value="Miss">Miss
+        <option name="CPTitle" value="Ms">Ms
+    </select>
+    <p class="text"><label>First name</label></p>
+    <p><input type="text" ng-model="ContactPersonFirstName">
+    <p class="text"><label>Middle name(s) (if applicable)</label></p>
+    <p><input type="text" ng-model="ContactPersonMiddleName"></p>
+    <p class="text"><label>Surname(s)</label></p>
+    <p><input type="text" ng-model="ContactPersonSurname"></p>
+    <p class="text"><label>Telephone number</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactPersonTel_header"> - <input type="text" ng-model="ContactPersonTel_body"></p>
+    <p class="text"><label>Job title</label></p>
+    <p><input type="text" ng-model="ContactPersonJobTitle"></p>
+    <p class="text"><label>Business email address (Optional)</label><a href="#" data-toggle="tooltip" data-placement="top" title="----help code----"> ? </a></p>
+    <p><input type="text" ng-model="ContactPersonEmail"></p> -->
+    
+
+    <div class="form-footer">
+        <p class="text" ng-hide="isSaved"><label>Saved in {{dateTime}}</label></p><button type="submit" class="btn btn-primary" ng-click="saveInfo()">Save my progress</button>
+        <button type="submit" class="btn btn-primary" ng-click="handleContinueBtn()">Go back</button>
+    </div>
+
   </div>
- 
-</body>
- 
+</div>
+
+<!-- <span ng-mouseenter="show = true" ng-mouseleave="show = false"> ???</span>
+<div ng-show="show">Hello!</div> -->
+

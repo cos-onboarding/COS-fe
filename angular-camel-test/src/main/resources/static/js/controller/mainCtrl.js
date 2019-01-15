@@ -19,7 +19,17 @@ var app = angular.module("myApp",['ui.router','ui.calendar','ui.bootstrap']).con
                 url: '/calendar',
                 templateUrl:"html/calendar.html",
                 controller:"CalendarCtrl"
-            }).state("basicinfo",{
+            }).state("info",{
+                url: '/info',
+                templateUrl:"html/basicinfo.html",
+                controller:"basicinfoCtr"
+            }).state("baseinfo",{
+                url: '/baseinfo',
+                templateUrl:"html/baseinfo.html",
+                controller:"baseinfoCtrl"
+            })
+            
+            .state("basicinfo",{
                 url: '/basicinfo',
                 templateUrl:"html/basicinfo.html",
                 controller:"basicinfoCtrl"

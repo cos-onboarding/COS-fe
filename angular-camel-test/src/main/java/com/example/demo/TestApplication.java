@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages="com.example.demo.camel")
+@ComponentScan(basePackages = "com.example.demo.camel")
 public class TestApplication {
-	 
+
 	@Bean
 	ServletRegistrationBean servletRegistrationBean() {
-	    ServletRegistrationBean servlet = new ServletRegistrationBean
-	      (new CamelHttpTransportServlet(), "/camel"+"/*");
-	    servlet.setName("CamelServlet");
-	    return servlet;
+		ServletRegistrationBean servlet = new ServletRegistrationBean(new CamelHttpTransportServlet(), "/camel" + "/*");
+		servlet.setName("CamelServlet");
+		return servlet;
 	}
+
 	public static void main(String[] args) {
 		System.out.println("helloaaaaaaaaa");
 		SpringApplication.run(TestApplication.class, args);
@@ -25,4 +25,3 @@ public class TestApplication {
 	}
 
 }
-
