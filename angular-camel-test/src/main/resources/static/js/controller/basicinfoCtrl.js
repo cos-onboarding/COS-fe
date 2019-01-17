@@ -95,6 +95,7 @@ app.controller("basicinfoCtrl",function ($rootScope,$scope,$http) {
             }, function errorCallback(response) {
             	//("服务器故障，保存失败...");
         });
+        
             
             
     }     

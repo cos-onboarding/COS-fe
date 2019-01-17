@@ -81,7 +81,8 @@ app.controller("basicinfoCtr",function ($rootScope,$scope,$http) {
 	    	ContactEmail:$scope.ContactEmail ,  
 	    	ContactTel_header:$scope.ContactTel_header,
 	    	ContactFaxNo_header:$scope.ContactFaxNo_header,
-	    	ContactWebsite:$scope.ContactWebsite};              
+	    	ContactWebsite:$scope.ContactWebsite};  
+           
 
        $http.post("/camel/api/basicinfo", param).then(function successCallback(response) {
        	
