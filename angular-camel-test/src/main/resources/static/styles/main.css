@@ -1,0 +1,124 @@
+*{    
+	margin: 0px;
+	padding: 0px;
+	box-sizing: content-box;
+}
+.haselogo{
+    text-align: left;
+    padding: 12px 0;
+}
+.haselogo img{
+	width: 35%;
+	height: 60px;
+	margin-left: 20px;
+	cursor: pointer;
+	/* vertical-align: middle; */
+}
+/* .icon{
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+} */
+.html_title{
+    background: #34A344;
+    margin: 0 -80px;
+    /* padding-left: 20px; */
+}
+.html_title h1{
+	padding: 30px 110px;
+	color: white;
+    font-size: 27px;
+    /* margin: 0; */
+    /* font-weight: 200; */
+    font-family: inherit;
+    line-height: 1.1;
+}
+.html_mainform{
+    /* border: 1px solid red; */
+    margin-left: 30px; 
+}
+.html_mainform_body{
+    border-top: 1px solid #D7D8D6;
+    /* border-bottom: 1px solid #D7D8D6; */
+    width: 60%;
+}
+.html_mainform_body a{
+	margin: 20px 0 -25px 0; 
+}
+.html_mainform_body .html_btn{
+	margin-top: 35px;
+	color: white;
+	font-size: 19px;
+    font-weight: 600;
+    background-color: #31A041;
+    border-color: #31A041;
+	border-radius: 4px;
+	height: 50px;
+	width: 15%;
+	float:right;
+}
+.html_desc{
+    padding: 20px 0;
+    font-size: 20px;
+    font-weight: 450;
+}
+.html_mainform-group label{
+    font-weight: 400;
+    font-size: 17px;
+    color: #333;
+    margin: 30px 0 20px 0;
+}
+.html_mainform-group .html_input_data{
+    width: 100%;
+}
+.html_mainform-submit{
+	margin-top: 70px;
+    border-top: 1px solid #D7D8D6;
+}
+
+.html_details{
+    margin-top: 40px;
+}
+.html_mainform_heading{
+    font-weight: 430;
+    font-size: 27px;
+    color: #0C6C26;
+    margin: 35px 0 20px 0;
+    /* width: 100%; */
+}
+.sub-category{
+	color: #0C6C26;
+	font-size: 21px;
+	margin: 15px 0;
+}
+.html_mainform-group .html_input_data,.html_mainform-group .tel_header,.html_mainform-group .tel_body,.html_mainform-group select{
+	/* border: 2px solid red; */
+	font-weight: 400;
+    font-size: 17px;
+    color: #333;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    height: 40px;
+    display: inline-block;
+}
+.html_mainform-group select{
+	width: 100%;
+}
+.tel_header{
+	width: 20%;
+}
+.tel_body{
+	width: 77.66%;
+}
+.html_mainform-submit .btns{
+    width: 28%;
+}
+.html_mainform-submit .save-btn{
+    margin-right: 20px; 
+}   
+.crud_btn{
+	border: 1px solid gray;
+	float: right;
+}
+}
