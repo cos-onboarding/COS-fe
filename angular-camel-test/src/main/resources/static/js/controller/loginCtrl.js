@@ -2,7 +2,6 @@ app.controller("loginCtrl",function ($rootScope,$scope,$http) {
     $rootScope.isLandingPage = false;
     $scope.isLoggedin = false;
     $scope.isOneblank = true;
-
         
     $scope.userLogin = function(){
         var param = { "username": $scope.username, "password": $scope.password};
