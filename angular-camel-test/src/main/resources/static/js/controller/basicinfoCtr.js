@@ -10,12 +10,8 @@ app.controller("basicinfoCtr",function ($rootScope,$scope,$http) {
    $scope.saveInfo = function(){
    	var username =window.sessionStorage.getItem("username");
    	var password =window.sessionStorage.getItem("password");
-   	var uid="";  
-   	for(var i=0;i<8;i++){//8位随机数，用以加在时间戳后面。
-   	
-   	    uid += Math.floor(Math.random()*10);
-   	}
-   	id = new Date().getTime() + uid; // 时间戳，用来生成id。
+   	var id =window.sessionStorage.getItem("application");
+  
    
    	 var param = { username:username,password:password,
    			 id:id,IsAddressOutsideHK:$scope.IsAddressOutsideHK, 

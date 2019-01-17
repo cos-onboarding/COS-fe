@@ -85,6 +85,7 @@ app.controller("basicinfoCtrl",function ($rootScope,$scope,$http) {
             	 if("success" == response.data) {
             		 $scope.isSaved =false;
             		 $scope.dateTime = new Date();
+            		 window.location.href="#!/baseinfo";
                  } else {
                 	 alert("保存失败...");
                  }
