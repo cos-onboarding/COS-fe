@@ -30,9 +30,14 @@ var app = angular.module("myApp",['ui.router','ui.calendar','ui.bootstrap']).con
             })
             
             .state("basicinfo",{
-                url: '/basicinfo',
+                url: '/basicinfo/',
                 templateUrl:"html/basicinfo.html",
                 controller:"basicinfoCtrl"
+            })
+            .state("modal",{
+                url: '/modal',
+                templateUrl:"html/modal.html",
+                controller:"Modalsssss"
             })
         });
 app.controller("mainCtrl",function ($rootScope,$scope) {

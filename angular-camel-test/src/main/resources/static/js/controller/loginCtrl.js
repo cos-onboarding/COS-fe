@@ -1,8 +1,7 @@
-app.controller("loginCtrl",function ($rootScope,$scope,$http) {
+app.controller("loginCtrl",function ($rootScope,$scope,$http,$state) {
     $rootScope.isLandingPage = false;
     $scope.isLoggedin = false;
     $scope.isOneblank = true;
-        
     $scope.userLogin = function(){
         var param = { "username": $scope.username, "password": $scope.password};
         if("" !== $scope.username && "" !== $scope.password) {
@@ -19,7 +18,8 @@ app.controller("loginCtrl",function ($rootScope,$scope,$http) {
                     window.sessionStorage.setItem("password",$scope.password);
                     // window.sessionStorage.setItem("infos",response.data.infos);
                     console.log("login:end");
-                    window.location.href="#!/baseinfo";
+//                    window.location.href="#!/baseinfo";
+                    $state.go("baseinfo");
                 } else {
                     $scope.isLoggedin = true;
                 }
