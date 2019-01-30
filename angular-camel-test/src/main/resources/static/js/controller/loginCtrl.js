@@ -1,18 +1,25 @@
-app.controller("loginCtrl",function ($rootScope,$scope,$http) {
+app.controller("loginCtrl",function ($rootScope,$scope,$http,$state) {
     $rootScope.isLandingPage = false;
     $scope.isLoggedin = false;
     $scope.isOneblank = true;
-
-        
     $scope.userLogin = function(){
-        var param = { username: $scope.username, password: $scope.password};
+        var param = { "username": $scope.username, "password": $scope.password};
         if("" !== $scope.username && "" !== $scope.password) {
             $scope.isOneblank = true;
             $http.post("/camel/api/login", param).then(function (response) {
-                if("success" == response.data.data) {
+                if("200"== response.status && response.data.users.length>=1) {
+                //if("sucess"== response.data.result) {
                     $scope.isLoggedin = false;
+                    
+                    console.log("login:");
+                    //console.log(response.data.result);
+                    console.log(response.status);
                     window.sessionStorage.setItem("username",$scope.username);
-                    window.location.href="#!/overview";
+                    window.sessionStorage.setItem("password",$scope.password);
+                    // window.sessionStorage.setItem("infos",response.data.infos);
+                    console.log("login:end");
+//                    window.location.href="#!/baseinfo";
+                    $state.go("baseinfo");
                 } else {
                     $scope.isLoggedin = true;
                 }
